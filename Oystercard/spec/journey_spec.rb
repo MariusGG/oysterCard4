@@ -21,10 +21,12 @@ describe Journey do
       subject.end(station_2)
       expect(subject.fare).to eq Oystercard::MIN_AMOUNT
     end
-    #
-    # it "should charge a fare for no entry" do
-    #   expect(subject.fare).to eq Oystercard::PENALTY
-    # end
+
+    it "should charge penalty fare if journey is not complete" do
+      subject = Journey.new(station)
+      subject.end
+      expect(subject.fare).to eq Oystercard::PENALTY
+    end
   end
 
   describe 'complete?' do

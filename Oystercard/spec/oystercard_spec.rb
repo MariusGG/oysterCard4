@@ -2,8 +2,8 @@ require 'oystercard'
 require 'pry'
 describe Oystercard do
 
-let(:entry_station) { double("Liverpool St")}
-let(:exit_station) { double("Aldgate")}
+let(:station_1) { double("Liverpool St")}
+let(:station_2) { double("Aldgate")}
 
 context 'when initialized' do
   it 'has a balance of zero' do
@@ -31,20 +31,19 @@ context 'at maximum balance' do
   end
 end
 
-# describe '#deduct' do
-#   it 'deducts from my card' do
-#       random_number1 = rand
-#       random_number2 = rand
-#       subject.top_up(random_number1)
-#       expect {subject.deduct(random_number2)}.to change {subject.balance}.by -random_number2
-#     end
-# end
-
  describe '#touch_in' do
-   it "remembers the entry station" do
+   let(:current_journey) { double :current_journey}
+
+   # just checking a method call
+   it "should create a new journey" do
+     subject = Oystercard.new(current_journey)
+     expect(current_journey).to receive(:new)
      subject.top_up(5)
-     subject.touch_in(entry_station)
-     expect(subject.entry_station).to eq entry_station
+     subject.touch_in(station_1)
+     # Journey.new
+     # current_journey = Journey.new
+     # current_journey.new
+
    end
 
  end

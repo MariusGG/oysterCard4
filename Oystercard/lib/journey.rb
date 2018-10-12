@@ -16,6 +16,6 @@ class Journey
   end
 
   def fare
-    Oystercard::MIN_AMOUNT
+    complete? ? Oystercard::MIN_AMOUNT : Oystercard::PENALTY
   end
 end

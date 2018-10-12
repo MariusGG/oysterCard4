@@ -1,18 +1,18 @@
 require 'pry'
 require 'station'
+require_relative 'journey'
 
 class Oystercard
-  attr_reader :balance, :entry_station, :journeys, :exit_station
+  attr_reader :balance, :journeys
 
   MAX_LIMIT = 90
   MIN_AMOUNT = 1
   PENALTY = 6
 
-  def initialize
+  def initialize(current_journey = Journey)
     @balance = 0
     @journeys = []
-    @entry_station = nil
-    @exit_station = nil
+    @current_journey = current_journey
   end
 
   def top_up(amount)
@@ -22,7 +22,7 @@ class Oystercard
 
   def touch_in(station)
     raise "Insufficient balance, minimum amount is #{MIN_AMOUNT}" if @balance < 1
-    @entry_station = station
+    @current_journey.new(station)
 
   end
   def touch_out(station)
