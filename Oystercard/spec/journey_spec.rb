@@ -21,5 +21,29 @@ describe Journey do
       subject.end(station_2)
       expect(subject.fare).to eq Oystercard::MIN_AMOUNT
     end
+    #
+    # it "should charge a fare for no entry" do
+    #   expect(subject.fare).to eq Oystercard::PENALTY
+    # end
+  end
+
+  describe 'complete?' do
+    it "should return true when there is an exit and entry station" do
+      subject =Journey.new(station)
+      subject.end(station_2)
+      expect(subject.complete?).to eq true
+    end
+
+    it "should return false when there is no entry station" do
+      subject =Journey.new
+      subject.end(station_2)
+      expect(subject.complete?).to eq false
+    end
+
+    it "should return false when there is no exit station" do
+      subject =Journey.new(station)
+      subject.end
+      expect(subject.complete?).to eq false
+    end
   end
 end
